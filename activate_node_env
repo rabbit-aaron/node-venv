@@ -1,0 +1,17 @@
+if [ -d $(pwd)/node_modules/.bin ]; then
+
+    deactivate(){
+        export PS1=$_ORIG_PS1
+        export PATH=$_ORIG_PATH
+        unset _ORIG_PS1
+        unset _ORIG_PATH
+        unset deactivate
+    }
+
+    export _ORIG_PS1=$PS1
+    export _ORIG_PATH=$PATH
+    export PS1=(node_env)\ $_ORIG_PS1
+    export PATH=$(pwd)/node_modules/.bin:$_ORIG_PATH
+else
+    echo Directory $(pwd)/node_modules/.bin does not exist > /dev/stderr
+fi
